@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
 export class RserviceService {
-  url:string="http://localhost:9003/";
+  url:string="http://localhost:9003/save";
 
   constructor( private http:HttpClient) { }
-  create(cust:any){
-    return this.http.post(this.url,cust);
+storeData(cust:any){
+  console.log(cust);
+  const header1=new HttpHeaders();
+  header1.append('Content-Type','application/json;charset=UTF-8');
+  return this.http.post(this.url,JSON.stringify(cust),{headers:header1});
   }
 }

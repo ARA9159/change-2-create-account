@@ -13,7 +13,7 @@ export class Register{
     adres:string;
     place:string;
     code:number;
-    constructor(type,fname,lname,gname,age,dob,cnum,anum,eid,npsw,cpsw,adres,place,code){
+    constructor(type:number,fname:string,lname:string,gname:string,age:number,dob:string,cnum:number,anum:number,eid:string,npsw:string,cpsw:string,adres:string,place:string,code:number){
         this.type=type;
         this.fname=fname;
         this.lname=lname;

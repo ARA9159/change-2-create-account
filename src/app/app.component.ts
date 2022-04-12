@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factory_loader';
 import { Validators,FormGroup,FormControl } from '@angular/forms';
 import {Register} from '../app/register'
+import { RserviceService } from './rservice.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ export class AppComponent {
   registerform:FormGroup;
   successMessage:string;
   registers:Register[]=[];
-  constructor(){
+  constructor(private rservice:RserviceService ){
     this.registerform=new FormGroup({
       type:new FormControl(null,[Validators.required]),
       fname:new FormControl(null,[Validators.required]),
@@ -46,6 +48,11 @@ this.registerform.value.adres,
 this.registerform.value.place,
 this.registerform.value.code
     ));
+    console.log(this.registers);
+    this.rservice.storeData(this.registers)
+    .subscribe(registers=>{
+      console.log(registers);
+    })
     console.log(this.registerform.value);
     alert('successfully created account');
     return this.registerform.reset();
