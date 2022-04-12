@@ -5,9 +5,8 @@
       <div class="card-details">
         <div class="form-group">
           <label for="type">ACCOUNT TYPE</label><br>
-          <select class="form-control" formControlName="type" id="type">
-            <option disabled>SELECT TYPE</option>
-            <option>ACCOUNT TYPE</option>
+          <select  class="form-control" formControlName="type" id="type">
+            <option selected>ACCOUNT TYPE</option>
             <option>SAVINGS ACCOUNT</option>
             <option>CURRENT ACCOUNT</option>
             <option>SALARY ACCOUNT</option>
@@ -25,14 +24,14 @@
           <small style="color: red;" *ngIf="lname.invalid && lname.touched">*LastName is Required </small>
         </div>
         <div class="form-group">
-          <label for="type">GENDER</label><br>
-          <select>
-            <option selected disabled>SELECT GENDER</option>
-            <option value="1">MALE</option>
-            <option value="2">FEMALE</option>
-            <option value="3">OTHERS</option>
-            <small style="color: red;" *ngIf="gname.invalid && gname.touched">*Gender is Required </small>
+          <label for="gname">GENDER</label><br>
+          <select class="form-control" formControlName="gname" id="gname">
+            <option selected>SELECT GENDER</option>
+            <option>MALE</option>
+            <option>FEMALE</option>
+            <option>OTHERS</option>
           </select>
+          <small style="color: red;" *ngIf="gname.invalid && gname.touched">*Gender is Required </small>
         </div>
         <div class="form-group">
           <label for="age">AGE</label>
@@ -94,6 +93,9 @@
         <input type="submit" value="REGISTER">
       </div>
     </form>
+  </div>
+  <div class="alert alert-primary" role="alert">
+    {{successMessage}}
   </div>
 </body>
 <router-outlet></router-outlet>

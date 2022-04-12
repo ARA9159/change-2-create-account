@@ -1,6 +1,6 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { Validators,FormGroup,FormControl } from '@angular/forms';
+import {Register} from '../app/register'
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,8 @@ import { Validators,FormGroup,FormControl } from '@angular/forms';
 export class AppComponent {
   title = 'CREATE ACCOUNT';
   registerform:FormGroup;
+  successMessage:string;
+  registers:Register[]=[];
   constructor(){
     this.registerform=new FormGroup({
       type:new FormControl(null,[Validators.required]),
@@ -27,6 +29,26 @@ export class AppComponent {
       place:new FormControl(null,[Validators.required]),
       code:new FormControl(null,[Validators.required,Validators.pattern('[0-9]{6}')])
     });
+  }
+  create(){
+    this.registers.push(new Register(this.registerform.value.type,
+    this.registerform.value.fname,
+  this.registerform.value.lname,
+this.registerform.value.gname,
+this.registerform.value.age,
+this.registerform.value.dob,
+this.registerform.value.cnum,
+this.registerform.value.anum,
+this.registerform.value.eid,
+this.registerform.value.npsw,
+this.registerform.value.cpsw,
+this.registerform.value.adres,
+this.registerform.value.place,
+this.registerform.value.code
+    ));
+    console.log(this.registerform.value);
+    alert('successfully created account');
+    return this.registerform.reset();
   }
   get type(){
     return this.registerform.get('type');
@@ -70,8 +92,5 @@ export class AppComponent {
   get code(){
     return this.registerform.get('code');
   }
-  create(){
-    console.log(this.registerform);
-    return this.registerform.reset();
-  }
+  
 }
