@@ -9,8 +9,9 @@ export class RserviceService {
   constructor( private http:HttpClient) { }
 storeData(cust:any){
   console.log(cust);
-  const header1=new HttpHeaders();
-  header1.append('Content-Type','application/json;charset=UTF-8');
-  return this.http.post(this.url,JSON.stringify(cust),{headers:header1});
-  }
+  //const header1=new HttpHeaders();
+  //header1.append('Content-Type','application/json;charset=UTF-8');
+  //return this.http.post(this.url,JSON.stringify(cust),{headers:header1});
+  return this.http.post(this.url,cust,{responseType:'text'});  
+}
 }

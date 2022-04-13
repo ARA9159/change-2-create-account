@@ -1,5 +1,5 @@
 export class Register{
-    type:number;
+    type:string;
     fname:string;
     lname:string;
     gname:string;
@@ -13,7 +13,7 @@ export class Register{
     adres:string;
     place:string;
     code:number;
-    constructor(type:number,fname:string,lname:string,gname:string,age:number,dob:string,cnum:number,anum:number,eid:string,npsw:string,cpsw:string,adres:string,place:string,code:number){
+    constructor(type:string,fname:string,lname:string,gname:string,age:number,dob:string,cnum:number,anum:number,eid:string,npsw:string,cpsw:string,adres:string,place:string,code:number){
         this.type=type;
         this.fname=fname;
         this.lname=lname;

@@ -3,6 +3,7 @@ import { registerModuleFactory } from '@angular/core/src/linker/ng_module_factor
 import { Validators,FormGroup,FormControl } from '@angular/forms';
 import {Register} from '../app/register'
 import { RserviceService } from './rservice.service';
+import { AccountType } from './accounttype';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,16 @@ import { RserviceService } from './rservice.service';
 })
 export class AppComponent {
   title = 'CREATE ACCOUNT';
+  accountTypes:AccountType[]=[
+    {id:1,name:'SAVING ACCOUNT'},
+    {id:2,name:'CURRENT ACCOUNT'},
+    {id:3,name:'SALARY ACCOUNT'},
+
+  ]
   registerform:FormGroup;
   successMessage:string;
-  registers:Register[]=[];
+  //registers:Register[]=[];
+  register:Register;
   constructor(private rservice:RserviceService ){
     this.registerform=new FormGroup({
       type:new FormControl(null,[Validators.required]),
@@ -23,17 +31,20 @@ export class AppComponent {
       age:new FormControl(null,[Validators.required,Validators.pattern('[0-9]{2}')]),
       dob:new FormControl(null,[Validators.required]),
       cnum:new FormControl(null,[Validators.required,Validators.pattern('[0-9]{10}')]),
-      anum:new FormControl(null,[Validators.required,Validators.pattern('[0-9]+')]),
+      anum:new FormControl(null,[Validators.required,Validators.pattern('[0-9]{12}')]),
       eid:new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]),
       npsw:new FormControl(null,[Validators.required,Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=[^0-9]*[0-9]).{8,}$')]),
       cpsw:new FormControl(null,[Validators.required,Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=[^0-9]*[0-9]).{8,}$')]),
-      adres:new FormControl(null,[Validators.required]),
+      adres:new FormControl(null,[Validators.required,Validators.pattern('[0-9a-zA-Z-/]{2,5}')]),
       place:new FormControl(null,[Validators.required]),
       code:new FormControl(null,[Validators.required,Validators.pattern('[0-9]{6}')])
     });
   }
   create(){
-    this.registers.push(new Register(this.registerform.value.type,
+   // this.registers.push(new Register(this.registerform.value.type,
+    
+   this.register = new Register(
+    this.registerform.value.type,
     this.registerform.value.fname,
   this.registerform.value.lname,
 this.registerform.value.gname,
@@ -47,14 +58,14 @@ this.registerform.value.cpsw,
 this.registerform.value.adres,
 this.registerform.value.place,
 this.registerform.value.code
-    ));
-    console.log(this.registers);
-    this.rservice.storeData(this.registers)
+    );
+    console.log(this.register);
+    this.rservice.storeData(this.register)
     .subscribe(registers=>{
       console.log(registers);
+      console.log(this.registerform.value);
+      alert('successfully created account');
     })
-    console.log(this.registerform.value);
-    alert('successfully created account');
     return this.registerform.reset();
   }
   get type(){
